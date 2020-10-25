@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// /namespace CSharp7Features =>1
 /// </summary>
+/// ---------------------------------------------------------------------------------------------------------------
 //namespace CSharp7Features
 //{
 //    class Program
@@ -139,38 +140,76 @@ using System.Threading.Tasks;
 /// <summary>
 /// /namespace CSharp7Features =>2
 /// </summary>
+/// ---------------------------------------------------------------------------------------------
+//namespace CSharp7Features
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            var tp = TupleSample.GetNewTuple();
+//            Console.WriteLine($"name : {tp.Item1} , family : {tp.Item2} , Age : {tp.Item3} , ");
+//            Console.ReadKey();
+
+//            //-------------------------------------------------
+//            var tp2 = TupleSample.GetNewTuple2();
+//            Console.WriteLine($"name : {tp2.name} , family : {tp2.family} , Age : {tp2.age}  ");
+
+//        }
+//    }
+//    class TupleSample
+//    {
+//       public static (string , string , int) GetNewTuple() // Nuget => Install-Package "System.ValueTuple" -IncludePrerelease
+//        {
+//            string name = "Ruhollah";
+//            string family = "Jafari";
+//            int age = 26;
+//            return (name, family, age);
+//        }
+
+//        public static (string name, string family, int age) GetNewTuple2()  
+//        {
+//            string name = "Ruhollah";
+//            string family = "Jafari";
+//            int age = 96;
+//            return (name, family, age);
+//        }
+//    }
+//}
+
+
+///-----تفاوت دارن-=>-Diffrence------------(نخریب کننده)Deconstructor--------------Deconstruct=>c#7
+
 namespace CSharp7Features
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var tp = TupleSample.GetNewTuple();
-            Console.WriteLine($"name : {tp.Item1} , family : {tp.Item2} , Age : {tp.Item3} , ");
-            Console.ReadKey();
+            Person p = new Person("Ru","Jf");
+            //   Console.WriteLine($"Name : {p.FirstName} , Family :  {p.LastName}");
+            var (firstName, lastName) = p;
 
-            //-------------------------------------------------
-            var tp2 = TupleSample.GetNewTuple2();
-            Console.WriteLine($"name : {tp2.name} , family : {tp2.family} , Age : {tp2.age}  ");
+            Console.WriteLine($"Name : {firstName} , Family :  {lastName}");
 
         }
     }
-    class TupleSample
+
+    class Person
     {
-       public static (string , string , int) GetNewTuple() // Nuget => Install-Package "System.ValueTuple" -IncludePrerelease
+        private string FirstName { get; }
+
+        private string LastName { get; }
+        public Person( string firstName , string lastName )
         {
-            string name = "Ruhollah";
-            string family = "Jafari";
-            int age = 26;
-            return (name, family, age);
+            FirstName = firstName;
+            LastName = lastName;
         }
 
-        public static (string name, string family, int age) GetNewTuple2()  
+        public void Deconstruct(out string firstnName , out string lastName)
         {
-            string name = "Ruhollah";
-            string family = "Jafari";
-            int age = 96;
-            return (name, family, age);
+            firstnName = FirstName;
+            lastName = LastName;
         }
     }
 }
