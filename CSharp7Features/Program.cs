@@ -180,36 +180,77 @@ using System.Threading.Tasks;
 
 ///-----تفاوت دارن-=>-Diffrence------------(نخریب کننده)Deconstructor--------------Deconstruct=>c#7
 
-namespace CSharp7Features
+//namespace CSharp7Features
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            Person p = new Person("Ru","Jf");
+//            //   Console.WriteLine($"Name : {p.FirstName} , Family :  {p.LastName}");
+//            var (firstName, lastName) = p;
+
+//            Console.WriteLine($"Name : {firstName} , Family :  {lastName}");
+
+//        }
+//    }
+
+//    class Person
+//    {
+//        private string FirstName { get; }
+
+//        private string LastName { get; }
+//        public Person( string firstName , string lastName )
+//        {
+//            FirstName = firstName;
+//            LastName = lastName;
+//        }
+
+//        public void Deconstruct(out string firstnName , out string lastName)
+//        {
+//            firstnName = FirstName;
+//            lastName = LastName;
+//        }
+//    }
+//}
+
+
+ 
+namespace CSharp7Features  // is expression c#7 => بیرون کشیدن کلاس پدر از کلاسی که از یک کلاس دیگه ارث بری کرده
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
-            Person p = new Person("Ru","Jf");
-            //   Console.WriteLine($"Name : {p.FirstName} , Family :  {p.LastName}");
-            var (firstName, lastName) = p;
-
-            Console.WriteLine($"Name : {firstName} , Family :  {lastName}");
-
+            //استخراج کلاس پدر به دلیل فواید زیاد آن
+            //=> وقتی از کلاس پسر نمونه جدید می سازیم در اصل ویژگی های کلاس پدر رو هم بهش دسترسی داریم
+            //با استفاده از این ویژگی میتونیم بفهمیم کدوم ویژگی ها برای پدره..........
+            PersonCar pc = new PersonCar("Ruhollah","Jafari",26,"Pride",1380);
+            if (pc is Person p) // اگر پی سی عضوی از مجموعه افراد هست به من بده
+            {
+                Console.WriteLine($"Name : {p.Name} , Family : {p.Family} , Age : {p.Age}");
+                Console.ReadKey();
+            }
         }
     }
-
-    class Person
+    class Person //=>با استفاده از این ویژگی میتونیم از کلاس های تودر تو استفاده کنیم 
     {
-        private string FirstName { get; }
+        public string Name { get; set; }
+        public string Family { get; set; }
+        public int Age { get; set; }
 
-        private string LastName { get; }
-        public Person( string firstName , string lastName )
+    }
+    class PersonCar : Person
+    {
+        public string CarName { get; set; }
+        public int CarModel { get; set; }
+        public PersonCar(string name , string family ,int age , string carName , int carModel )
         {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-
-        public void Deconstruct(out string firstnName , out string lastName)
-        {
-            firstnName = FirstName;
-            lastName = LastName;
+            Name = name;
+            Family = family;
+            Age = age;
+            CarName = carName;
+            CarModel = carModel;
         }
     }
 }
