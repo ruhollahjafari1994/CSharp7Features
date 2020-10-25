@@ -179,7 +179,6 @@ using System.Threading.Tasks;
 
 
 ///-----تفاوت دارن-=>-Diffrence------------(نخریب کننده)Deconstructor--------------Deconstruct=>c#7
-
 //namespace CSharp7Features
 //{
 //    class Program
@@ -213,27 +212,96 @@ using System.Threading.Tasks;
 //        }
 //    }
 //}
+//---------------------------------------------------------------------------------------------------------------
 
 
- 
-namespace CSharp7Features  // is expression c#7 => بیرون کشیدن کلاس پدر از کلاسی که از یک کلاس دیگه ارث بری کرده
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------
+//namespace CSharp7Features  // is expression c#7 => بیرون کشیدن کلاس پدر از کلاسی که از یک کلاس دیگه ارث بری کرده
+//{
+//    class Program
+//    {
+//        static void Main(string[] args) 
+//        {
+//            //استخراج کلاس پدر به دلیل فواید زیاد آن
+//            //=> وقتی از کلاس پسر نمونه جدید می سازیم در اصل ویژگی های کلاس پدر رو هم بهش دسترسی داریم
+//            //با استفاده از این ویژگی میتونیم بفهمیم کدوم ویژگی ها برای پدره..........
+//            PersonCar pc = new PersonCar("Ruhollah","Jafari",26,"Pride",1380);
+//            if (pc is Person p) // اگر پی سی عضوی از مجموعه افراد هست به من بده
+//            {
+//                Console.WriteLine($"Name : {p.Name} , Family : {p.Family} , Age : {p.Age}");
+//                Console.ReadKey();
+//            }
+//        }
+//    }
+//    class Person //=>با استفاده از این ویژگی میتونیم از کلاس های تودر تو استفاده کنیم 
+//    {
+//        public string Name { get; set; }
+//        public string Family { get; set; }
+//        public int Age { get; set; }
+
+//    }
+//    class PersonCar : Person
+//    {
+//        public string CarName { get; set; }
+//        public int CarModel { get; set; }
+//        public PersonCar(string name , string family ,int age , string carName , int carModel )
+//        {
+//            Name = name;
+//            Family = family;
+//            Age = age;
+//            CarName = carName;
+//            CarModel = carModel;
+//        }
+//    }
+//}
+
+
+
+namespace CSharp7Features   //دستور شرطی =>Enum => Switch 
 {
     class Program
     {
-        static void Main(string[] args) 
+        static void Main(string[] args)
         {
-            //استخراج کلاس پدر به دلیل فواید زیاد آن
-            //=> وقتی از کلاس پسر نمونه جدید می سازیم در اصل ویژگی های کلاس پدر رو هم بهش دسترسی داریم
-            //با استفاده از این ویژگی میتونیم بفهمیم کدوم ویژگی ها برای پدره..........
-            PersonCar pc = new PersonCar("Ruhollah","Jafari",26,"Pride",1380);
-            if (pc is Person p) // اگر پی سی عضوی از مجموعه افراد هست به من بده
+         
+            PersonCar pc = new PersonCar("Ruhollah", "Jafari", 27, "Pride", 1380);
+            switch (pc)
             {
-                Console.WriteLine($"Name : {p.Name} , Family : {p.Family} , Age : {p.Age}");
-                Console.ReadKey();
+                case PersonCar car when (car.CarName == "Pride"):
+                    {
+                        Console.WriteLine($" pride");
+                        break;
+                    }
+
+                case Person p when (p.Age > 26):
+                    { 
+                    Console.WriteLine($"Name Is {p.Name }");
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Not Found!");
+                        break;
+                    }
+                case null:
+                    {
+                        Console.WriteLine("IS Null");
+                        break;
+                    }
             }
+            Console.ReadKey();
         }
     }
-    class Person //=>با استفاده از این ویژگی میتونیم از کلاس های تودر تو استفاده کنیم 
+    class Person  
     {
         public string Name { get; set; }
         public string Family { get; set; }
@@ -244,7 +312,7 @@ namespace CSharp7Features  // is expression c#7 => بیرون کشیدن کلا�
     {
         public string CarName { get; set; }
         public int CarModel { get; set; }
-        public PersonCar(string name , string family ,int age , string carName , int carModel )
+        public PersonCar(string name, string family, int age, string carName, int carModel)
         {
             Name = name;
             Family = family;
